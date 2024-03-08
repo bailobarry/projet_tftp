@@ -1,0 +1,57 @@
+Implémentation du Protocole TFTP en C
+Introduction au Projet
+Ce projet vise à implémenter, et à étendre, le protocole Trivial File Transfer Protocol (TFTP) en C, 
+en se concentrant sur le contrôle de flux et la gestion des connexions réseau. 
+TFTP est un protocole léger utilisé pour transférer des fichiers sur un réseau. 
+Ce projet approfondira vos compétences en programmation réseau, en gestion de la perte de paquets, 
+et en synchronisation dans un environnement multi-utilisateurs.
+
+Objectifs et Détails du Projet
+Étape 1 : Programme Client TFTP
+Fonctionnalités Clés :
+Lecture de fichiers : Envoyer une requête de lecture (RRQ) au serveur et gérer la réception des données.
+Écriture de fichiers : Envoyer une requête d'écriture (WRQ) et transmettre le fichier au serveur.
+Gestion des erreurs : Traiter les erreurs comme la perte de paquets en implémentant des timeouts et des retransmissions.
+Interopérabilité : Votre programme doit fonctionner avec un serveur standard du marché.
+Exemple : Gérer les timeout pour détecter la perte de paquets. 
+Si une réponse n'est pas reçue dans un délai spécifié après l'envoi d'un paquet, le client doit le retransmettre.
+
+Étape 2 : Programme Serveur TFTP Simple
+Fonctionnalités Clés :
+Traitement des requêtes RRQ et WRQ : Répondre aux requêtes de lecture et d'écriture des clients.
+Gestion des erreurs et des paquets perdus : Similaire au client, le serveur doit gérer les pertes de paquets et les erreurs.
+Interopérabilité : Votre programme doit fonctionner avec un client standard du marché.
+Exemple : Le serveur doit envoyer un message d'erreur si le fichier demandé n'existe pas ou si une opération d'écriture échoue.
+
+Étape 3 : Serveur TFTP Multi-clients
+Fonctionnalités Clés :
+Gestion simultanée de plusieurs clients : Deux versions :
+Une version multithreadé, avec un thread par client ;
+Une version monothreadé, en utilisant select() pour gérer les requêtes de plusieurs clients en parallèle.
+Synchronisation de fichier : Assurer la cohérence des fichiers en cas d'accès simultanés en lecture et en écriture.
+Exemple : Utiliser des mutex ou des sémaphores pour gérer l'accès concurrent aux mêmes fichiers par plusieurs clients dans le cas multithreadé.
+
+Étape 4 : Extension du Protocole TFTP
+Fonctionnalités Clés :
+Développement de l'option bigfile : Permettre de traiter des fichiers sans limitation de taille.
+Rédaction d'un RFC : Structurer le document selon les standards des RFC, décrivant en détail le fonctionnement de l'option bigfile.
+Respecte le protocol de négociation des options de TFTP : le protocole de présentation des options est décrit dans le RFC 2347.
+Exemple : Décrire dans le RFC comment l'option bigfile doit être traitée en cas de concurrence avec des opérations de lecture ou d'écriture sur le même fichier.
+
+Étape 5 (Bonus) : TFTP Windowsize Option
+Objectif : Intégrer l'option Windowsize, qui permet d'envoyer plusieurs paquets à la fois sans attendre un accusé de réception pour chaque paquet.
+Ressources supplémentaires
+Protocole TFTP : Trivial File Transfer Protocol (Wikipedia), RFC 135
+Introduction aux Sockets en C : GeeksforGeeks
+Fonction select : Beej's Guide
+Un exemple simple de transfert de fichier en UDP : File-Transfer-using-UDP-Socket-in-C
+Installation standard de tftp : sur ubuntu
+Serveur tftp salle TP : Un serveur tftp est accessible à partir des machines de TP, son adresse est 10.1.16.112.
+Bien sûr, voici l'ajout de la référence pour l'option Windowsize dans le cadre de votre projet :
+
+Ressources Supplémentaires sur l'Option Windowsize de TFTP
+TFTP Windowsize Option (RFC 7440) : Pour une compréhension approfondie de l'option Windowsize de TFTP, 
+qui permet d'améliorer les performances en autorisant la transmission de plusieurs paquets avant de recevoir un accusé de réception, 
+consultez le document RFC correspondant : RFC 7440 - TFTP Windowsize Option
+Cette ressource fournit des détails techniques essentiels sur la mise en œuvre de l'option Windowsize dans TFTP, 
+un ajout précieux pour l'objectif bonus de votre projet.
